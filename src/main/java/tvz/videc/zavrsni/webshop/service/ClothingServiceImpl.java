@@ -2,6 +2,7 @@ package tvz.videc.zavrsni.webshop.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import tvz.videc.zavrsni.webshop.model.login.User;
 import tvz.videc.zavrsni.webshop.model.products.Clothing;
 import tvz.videc.zavrsni.webshop.model.products.ClothingDTO;
 import tvz.videc.zavrsni.webshop.repository.ClothingRepository;
@@ -31,6 +32,11 @@ public class ClothingServiceImpl implements ClothingService {
     }
 
     @Override
+    public Optional<Clothing> findFullById(Long id) {
+        return clothingRepository.findById(id);
+    }
+
+    @Override
     public Optional<ClothingDTO> save(Clothing clothing) {
         clothingRepository.save(clothing);
         return Optional.of(mapClothingToClothingDTO(clothing));
@@ -42,9 +48,6 @@ public class ClothingServiceImpl implements ClothingService {
     }
 
     public ClothingDTO mapClothingToClothingDTO(Clothing clothing){
-        ModelMapper modelMapper = new ModelMapper();
-
-        return modelMapper.map(clothing, ClothingDTO.class);
-//        return new ModelMapper().map(user, UserDTO.class);
+        return new ClothingDTO(clothing.getId(), clothing.getName(), clothing.getDetails(), clothing.getPrice(), clothing.getImg(), clothing.getBrandName(), clothing.getSex(), clothing.getClothingType(), clothing.getUsersClothing().stream().map(User::getUsername).collect(Collectors.toSet()));
     }
 }

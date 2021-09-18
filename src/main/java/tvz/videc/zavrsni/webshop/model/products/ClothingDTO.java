@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Data @AllArgsConstructor @NoArgsConstructor
 public class ClothingDTO {
 
@@ -22,4 +24,6 @@ public class ClothingDTO {
     private Sex sex;
 
     private ClothingType clothingType;
+
+    private Set<String> username;
 }

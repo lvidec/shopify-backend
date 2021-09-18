@@ -12,7 +12,11 @@ public interface UserService {
 
     UserDTO findByUsername(String username);
 
+    User findFullById(Long id);
+
     Optional<UserDTO> save(User user);
+
+    Optional<UserDTO> addClothingToUser(Long userId, Long clothingId);
 
     void delete(Long id);
 }

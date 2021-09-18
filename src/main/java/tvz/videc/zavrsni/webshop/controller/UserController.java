@@ -26,14 +26,28 @@ public class UserController {
         return userService.findAll();
     }
 
-    @GetMapping("/{username}")
-    public UserDTO findByUsername(@PathVariable final String username) {
-        return userService.findByUsername(username);
+//    @GetMapping("/{username}")
+//    public UserDTO findByUsername(@PathVariable final String username) {
+//        return userService.findByUsername(username);
+//    }
+
+    @GetMapping("/{id}")
+    public User findFullById(@PathVariable final Long id) {
+        return userService.findFullById(id);
     }
 
     @PostMapping("/save")
     public ResponseEntity<UserDTO> saveUser(@RequestBody User user){
         return userService.save(user).map(
+                userDTO -> ResponseEntity.status(HttpStatus.CREATED).body(userDTO)
+        ).orElseGet(
+                () -> ResponseEntity.status(HttpStatus.CONFLICT).build()
+        );
+    }
+
+    @PutMapping("{userId}/save/{clothingId}")
+    public ResponseEntity<UserDTO> saveUser(@PathVariable Long userId, @PathVariable Long clothingId){
+        return userService.addClothingToUser(userId, clothingId).map(
                 userDTO -> ResponseEntity.status(HttpStatus.CREATED).body(userDTO)
         ).orElseGet(
                 () -> ResponseEntity.status(HttpStatus.CONFLICT).build()

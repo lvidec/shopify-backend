@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface ClothingRepository extends JpaRepository<Clothing, Long> {
 
     Optional<Clothing> findByName(String name);
+
+    Optional<Clothing> findById(Long id);
 }

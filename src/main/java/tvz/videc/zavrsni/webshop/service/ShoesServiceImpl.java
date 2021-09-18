@@ -2,6 +2,8 @@ package tvz.videc.zavrsni.webshop.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import tvz.videc.zavrsni.webshop.model.login.User;
+import tvz.videc.zavrsni.webshop.model.products.ClothingDTO;
 import tvz.videc.zavrsni.webshop.model.products.Shoes;
 import tvz.videc.zavrsni.webshop.model.products.ShoesDTO;
 import tvz.videc.zavrsni.webshop.repository.ShoesRepository;
@@ -42,9 +44,6 @@ public class ShoesServiceImpl implements ShoesService {
     }
 
     public ShoesDTO mapShoesToShoesDTO(Shoes shoes){
-        ModelMapper modelMapper = new ModelMapper();
-
-        return modelMapper.map(shoes, ShoesDTO.class);
-//        return new ModelMapper().map(user, UserDTO.class);
+        return new ShoesDTO(shoes.getId(), shoes.getName(), shoes.getDetails(), shoes.getPrice(), shoes.getImg(), shoes.getBrandName(), shoes.getSex(), shoes.getShoesType(), shoes.getUsersShoes().stream().map(User::getUsername).collect(Collectors.toSet()));
     }
 }

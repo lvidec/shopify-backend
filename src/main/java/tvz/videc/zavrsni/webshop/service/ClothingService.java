@@ -12,6 +12,8 @@ public interface ClothingService {
 
     Optional<ClothingDTO> findByName(String name);
 
+    Optional<Clothing> findFullById(Long id);
+
     Optional<ClothingDTO> save(Clothing clothing);
 
     void delete(Long id);

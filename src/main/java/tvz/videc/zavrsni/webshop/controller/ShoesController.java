@@ -32,7 +32,7 @@ public class ShoesController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<ShoesDTO> saveUser(@RequestBody Shoes shoes){
+    public ResponseEntity<ShoesDTO> saveShoes(@RequestBody Shoes shoes){
         return shoesService.save(shoes).map(
                 shoesDTO -> ResponseEntity.status(HttpStatus.CREATED).body(shoesDTO)
         ).orElseGet(

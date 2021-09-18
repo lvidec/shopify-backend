@@ -12,7 +12,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     //Only need to specify methods from JpaRepository, not from CrudRepository
     Optional<User> findByUsername(String username);
 
-//    List<User> findAll();
+    Optional<User> findById(Long id);
 
-//    User save(User user);
+
 }
+
