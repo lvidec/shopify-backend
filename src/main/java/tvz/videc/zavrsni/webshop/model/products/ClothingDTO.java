@@ -25,5 +25,5 @@ public class ClothingDTO {
 
     private ClothingType clothingType;
 
-    private Set<String> username;
+//    private Set<String> username;
 }

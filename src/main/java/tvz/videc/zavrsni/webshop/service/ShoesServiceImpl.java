@@ -44,6 +44,6 @@ public class ShoesServiceImpl implements ShoesService {
     }
 
     public ShoesDTO mapShoesToShoesDTO(Shoes shoes){
-        return new ShoesDTO(shoes.getId(), shoes.getName(), shoes.getDetails(), shoes.getPrice(), shoes.getImg(), shoes.getBrandName(), shoes.getSex(), shoes.getShoesType(), shoes.getUsersShoes().stream().map(User::getUsername).collect(Collectors.toSet()));
+        return new ShoesDTO(shoes.getId(), shoes.getName(), shoes.getDetails(), shoes.getPrice(), shoes.getImg(), shoes.getBrandName(), shoes.getSex(), shoes.getShoesType());
     }
 }

@@ -37,13 +37,13 @@ public class User {
     @JsonIgnore
     private Set<Authority> authorities;
 
-    @ManyToMany(targetEntity = Clothing.class, mappedBy = "usersClothing")
-    @JsonIgnore
-    private Set<Clothing> userClothing;
-
-    @ManyToMany(targetEntity = Shoes.class, mappedBy = "usersShoes")
-    @JsonIgnore
-    private Set<Shoes> userShoes;
+//    @ManyToMany(targetEntity = Clothing.class, mappedBy = "usersClothing")
+//    @JsonIgnore
+//    private Set<Clothing> userClothing;
+//
+//    @ManyToMany(targetEntity = Shoes.class, mappedBy = "usersShoes")
+//    @JsonIgnore
+//    private Set<Shoes> userShoes;
 
 
     public User(String username, String password, Optional<String> authority, Set<GrantedAuthority> grantedAuthorities) { }

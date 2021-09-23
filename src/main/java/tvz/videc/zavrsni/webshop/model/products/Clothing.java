@@ -41,12 +41,12 @@ public class Clothing {
     @JoinColumn(name = "id_clothing_type", nullable = false)
     private ClothingType clothingType;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_clothing",
-            joinColumns = { @JoinColumn(name = "clothing_id") },
-            inverseJoinColumns = {@JoinColumn(name = "user_id") }
-    )
-    @JsonIgnore
-    private List<User> usersClothing;
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinTable(name = "user_clothing",
+//            joinColumns = { @JoinColumn(name = "clothing_id") },
+//            inverseJoinColumns = {@JoinColumn(name = "user_id") }
+//    )
+//    @JsonIgnore
+//    private List<User> usersClothing;
 
 }

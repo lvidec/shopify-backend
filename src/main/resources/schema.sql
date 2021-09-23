@@ -35,12 +35,6 @@ CREATE TABLE IF NOT EXISTS clothing(
     FOREIGN KEY (id_clothing_type) REFERENCES clothing_type(id)
 );
 
-CREATE TABLE IF NOT EXISTS user_clothing(
-    user_id INT NOT NULL,
-    clothing_id INT NOT NULL,
-    CONSTRAINT fk_user_clothing FOREIGN KEY (user_id) REFERENCES USER(id),
-    CONSTRAINT fk_clothing FOREIGN KEY (clothing_id) REFERENCES clothing(id)
-);
 
 CREATE TABLE IF NOT EXISTS shoes_type(
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -60,9 +54,3 @@ CREATE TABLE IF NOT EXISTS shoes(
     FOREIGN KEY (id_shoes_type) REFERENCES shoes_type(id)
 );
 
-CREATE TABLE IF NOT EXISTS user_shoes(
-user_id INT NOT NULL,
-shoes_id INT NOT NULL,
-CONSTRAINT fk_user_shoes FOREIGN KEY (user_id) REFERENCES USER(id),
-CONSTRAINT fk_shoes FOREIGN KEY (shoes_id) REFERENCES shoes(id)
-);

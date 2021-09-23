@@ -12,8 +12,8 @@ public class UserDTO {
     private Long id;
     private String username;
     private Set<String> authorities;
-    private Set<String> clothing;
-    private Set<String> shoes;
+//    private Set<String> clothing;
+//    private Set<String> shoes;
 
 
 }

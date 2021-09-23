@@ -51,8 +51,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<UserDTO> save(User user) {
-//        userRepository.save(user);
-//        return Optional.of(mapUserToUserDTO(user));
+//another one//        userRepository.save(user);
+////        return Optional.of(mapUserToUserDTO(user));
 
         User newUser = new User();
         newUser.setUsername(user.getUsername());
@@ -67,24 +67,24 @@ public class UserServiceImpl implements UserService {
                             newAuthority.getUsers().add(newUser);
                             return newAuthority;
                         }).collect(Collectors.toSet()));
-        newUser.getUserClothing()
-                .addAll(user
-                        .getUserClothing()
-                        .stream()
-                        .map(clothing -> {
-                            Clothing newClothing = clothingRepository.findById(clothing.getId()).orElseThrow(EntityNotFoundException::new);
-                            newClothing.getUsersClothing().add(newUser);
-                            return newClothing;
-                        }).collect(Collectors.toSet()));
-        newUser.getUserShoes()
-                .addAll(user
-                        .getUserShoes()
-                        .stream()
-                        .map(shoes -> {
-                            Shoes newShoes = shoesRepository.findById(shoes.getId()).orElseThrow(EntityNotFoundException::new);
-                            newShoes.getUsersShoes().add(newUser);
-                            return newShoes;
-                        }).collect(Collectors.toSet()));
+//        newUser.getUserClothing()
+//                .addAll(user
+//                        .getUserClothing()
+//                        .stream()
+//                        .map(clothing -> {
+//                            Clothing newClothing = clothingRepository.findById(clothing.getId()).orElseThrow(EntityNotFoundException::new);
+//                            newClothing.getUsersClothing().add(newUser);
+//                            return newClothing;
+//                        }).collect(Collectors.toSet()));
+//        newUser.getUserShoes()
+//                .addAll(user
+//                        .getUserShoes()
+//                        .stream()
+//                        .map(shoes -> {
+//                            Shoes newShoes = shoesRepository.findById(shoes.getId()).orElseThrow(EntityNotFoundException::new);
+//                            newShoes.getUsersShoes().add(newUser);
+//                            return newShoes;
+//                        }).collect(Collectors.toSet()));
 
         userRepository.save(newUser);
 
@@ -95,12 +95,12 @@ public class UserServiceImpl implements UserService {
     public Optional<UserDTO> addClothingToUser(Long userId, Long clothingId) {
         User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
         Clothing clothing = clothingRepository.findById(clothingId).orElseThrow(EntityNotFoundException::new);
-        user.getUserClothing().add(clothing);
-//        user.setUserClothing(List.of(clothing));
+//        user.getUserClothing().add(clothing);
+//another one//        user.setUserClothing(List.of(clothing));
 
         user.setUsername("isuskrist ");
 
-        user.getUserClothing().forEach(x -> System.out.println(x.getName()));
+//another one//        user.getUserClothing().forEach(x -> System.out.println(x.getName()));
 
         userRepository.save(user);
         return Optional.of(mapUserToUserDTO(user));
@@ -112,7 +112,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public UserDTO mapUserToUserDTO(User user){
-        return new UserDTO(user.getId(), user.getUsername(), user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet()), user.getUserClothing().stream().map(Clothing::getName).collect(Collectors.toSet()), user.getUserShoes().stream().map(Shoes::getName).collect(Collectors.toSet()));
+        return new UserDTO(user.getId(), user.getUsername(), user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet()));
 
 //        return new ModelMapper().map(user, UserDTO.class);
     }

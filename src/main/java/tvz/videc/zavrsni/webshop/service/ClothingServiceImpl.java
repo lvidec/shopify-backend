@@ -48,6 +48,6 @@ public class ClothingServiceImpl implements ClothingService {
     }
 
     public ClothingDTO mapClothingToClothingDTO(Clothing clothing){
-        return new ClothingDTO(clothing.getId(), clothing.getName(), clothing.getDetails(), clothing.getPrice(), clothing.getImg(), clothing.getBrandName(), clothing.getSex(), clothing.getClothingType(), clothing.getUsersClothing().stream().map(User::getUsername).collect(Collectors.toSet()));
+        return new ClothingDTO(clothing.getId(), clothing.getName(), clothing.getDetails(), clothing.getPrice(), clothing.getImg(), clothing.getBrandName(), clothing.getSex(), clothing.getClothingType());
     }
 }
