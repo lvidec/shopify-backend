@@ -17,7 +17,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "${cross.origin}")
 public class LoginController {
 
     private final TokenProvider tokenProvider;
