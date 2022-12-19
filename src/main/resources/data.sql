@@ -127,21 +127,21 @@ UPDATE id = 3;
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 INSERT INTO shoes(id, NAME, details, price, img, brand_name, sex, id_shoes_type) VALUES
-(121, 'Versace flip flops', 'Details of Versace flip flops', 787, 'https://cdn-images.farfetch-contents.com/16/36/88/85/16368885_33485927_480.jpg', 'Versace', 'MALE', 2)
+(211, 'Versace flip flops', 'Details of Versace flip flops', 787, 'https://cdn-images.farfetch-contents.com/16/36/88/85/16368885_33485927_480.jpg', 'Versace', 'MALE', 2)
 ON DUPLICATE KEY 
-UPDATE id = 121;
+UPDATE id = 211;
 
 INSERT INTO shoes(id, NAME, details, price, img, brand_name, sex, id_shoes_type) VALUES
-(122, 'Nike x AMBUSH sneakers', 'Details of Nike x AMBUSH sneakers', 415, 'https://cdn-images.farfetch-contents.com/17/17/31/20/17173120_34835338_480.jpg', 'Nike', 'MALE', 1)
+(212, 'Nike x AMBUSH sneakers', 'Details of Nike x AMBUSH sneakers', 415, 'https://cdn-images.farfetch-contents.com/17/17/31/20/17173120_34835338_480.jpg', 'Nike', 'MALE', 1)
 ON DUPLICATE KEY 
-UPDATE id = 122;
+UPDATE id = 212;
 
 INSERT INTO shoes(id, NAME, details, price, img, brand_name, sex, id_shoes_type) VALUES
-(123, 'Gucci sport shoes', 'Details of Gucci sport shoes', 690, 'https://cdn-images.farfetch-contents.com/16/35/93/23/16359323_33405889_480.jpg', 'Gucci', 'MALE', 3)
+(213, 'Gucci sport shoes', 'Details of Gucci sport shoes', 690, 'https://cdn-images.farfetch-contents.com/16/35/93/23/16359323_33405889_480.jpg', 'Gucci', 'MALE', 3)
 ON DUPLICATE KEY 
-UPDATE id = 123;
+UPDATE id = 213;
 
 INSERT INTO shoes(id, NAME, details, price, img, brand_name, sex, id_shoes_type) VALUES
-(124, 'Dolce & Gabbana sneakers', 'Details of Dolce & Gabbana sneakers', 3450, 'https://cdn-images.farfetch-contents.com/16/07/89/57/16078957_31086730_480.jpg', 'Dolce & Gabbana', 'MALE', 1)
+(214, 'Dolce & Gabbana sneakers', 'Details of Dolce & Gabbana sneakers', 3450, 'https://cdn-images.farfetch-contents.com/16/07/89/57/16078957_31086730_480.jpg', 'Dolce & Gabbana', 'MALE', 1)
 ON DUPLICATE KEY 
-UPDATE id = 124;
+UPDATE id = 214;
