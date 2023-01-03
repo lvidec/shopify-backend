@@ -26,10 +26,10 @@ public class ShoesController {
         return shoesService.findAll();
     }
 
-    @GetMapping("/{name}")
-    public Optional<ShoesDTO> findByName(@PathVariable String name){
-        return shoesService.findByName(name);
-    }
+    // @GetMapping("/{name}")
+    // public Optional<ShoesDTO> findByName(@PathVariable String name){
+    //     return shoesService.findByName(name);
+    // }
 
     @GetMapping("/{id}")
     public Optional<Shoes> findFullById(@PathVariable Long id){
