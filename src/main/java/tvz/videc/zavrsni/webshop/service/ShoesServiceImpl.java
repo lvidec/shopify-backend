@@ -33,6 +33,11 @@ public class ShoesServiceImpl implements ShoesService {
     }
 
     @Override
+    public Optional<Shoes> findFullById(Long id) {
+        return shoesRepository.findById(id);
+    }
+
+    @Override
     public Optional<ShoesDTO> save(Shoes shoes) {
         shoesRepository.save(shoes);
         return Optional.of(mapShoesToShoesDTO(shoes));

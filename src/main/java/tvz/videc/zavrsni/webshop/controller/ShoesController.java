@@ -31,6 +31,11 @@ public class ShoesController {
         return shoesService.findByName(name);
     }
 
+    @GetMapping("/{id}")
+    public Optional<Shoes> findFullById(@PathVariable Long id){
+        return shoesService.findFullById(id);
+    }
+
     @PostMapping("/save")
     public ResponseEntity<ShoesDTO> saveShoes(@RequestBody Shoes shoes){
         return shoesService.save(shoes).map(
