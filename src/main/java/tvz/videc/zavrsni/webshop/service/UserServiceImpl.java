@@ -1,22 +1,21 @@
 package tvz.videc.zavrsni.webshop.service;
 
-import org.modelmapper.ModelMapper;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.stereotype.Service;
+
+import tvz.videc.zavrsni.webshop.model.login.AppUser;
 import tvz.videc.zavrsni.webshop.model.login.Authority;
-import tvz.videc.zavrsni.webshop.model.login.User;
 import tvz.videc.zavrsni.webshop.model.login.UserDTO;
 import tvz.videc.zavrsni.webshop.model.products.Clothing;
-import tvz.videc.zavrsni.webshop.model.products.ClothingDTO;
-import tvz.videc.zavrsni.webshop.model.products.Shoes;
 import tvz.videc.zavrsni.webshop.repository.AuthorityRepository;
 import tvz.videc.zavrsni.webshop.repository.ClothingRepository;
 import tvz.videc.zavrsni.webshop.repository.ShoesRepository;
 import tvz.videc.zavrsni.webshop.repository.UserRepository;
-
-import javax.persistence.EntityNotFoundException;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -45,16 +44,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findFullById(Long id){
+    public AppUser findFullById(Long id){
         return this.userRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Optional<UserDTO> save(User user) {
+    public Optional<UserDTO> save(AppUser user) {
 //another one//        userRepository.save(user);
 ////        return Optional.of(mapUserToUserDTO(user));
 
-        User newUser = new User();
+        AppUser newUser = new AppUser();
         newUser.setUsername(user.getUsername());
         newUser.setEmail(user.getEmail());
         newUser.setPassword(user.getPassword());
@@ -93,7 +92,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<UserDTO> addClothingToUser(Long userId, Long clothingId) {
-        User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
+        AppUser user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
         Clothing clothing = clothingRepository.findById(clothingId).orElseThrow(EntityNotFoundException::new);
 //        user.getUserClothing().add(clothing);
 //another one//        user.setUserClothing(List.of(clothing));
@@ -111,7 +110,7 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
-    public UserDTO mapUserToUserDTO(User user){
+    public UserDTO mapUserToUserDTO(AppUser user){
         return new UserDTO(user.getId(), user.getUsername(), user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet()));
 
 //        return new ModelMapper().map(user, UserDTO.class);

@@ -1,22 +1,26 @@
 package tvz.videc.zavrsni.webshop.model.login;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.security.core.GrantedAuthority;
-import tvz.videc.zavrsni.webshop.model.products.Clothing;
-import tvz.videc.zavrsni.webshop.model.products.Shoes;
-
-import javax.persistence.*;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.ManyToMany;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.security.core.GrantedAuthority;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Data @AllArgsConstructor @NoArgsConstructor
 @Entity
-public class User {
+public class AppUser {
 
     @javax.persistence.Id
     @Id
@@ -46,7 +50,7 @@ public class User {
 //    private Set<Shoes> userShoes;
 
 
-    public User(String username, String password, Optional<String> authority, Set<GrantedAuthority> grantedAuthorities) { }
+    public AppUser(String username, String password, Optional<String> authority, Set<GrantedAuthority> grantedAuthorities) { }
 
 
 

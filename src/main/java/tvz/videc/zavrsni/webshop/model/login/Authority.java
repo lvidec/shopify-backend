@@ -1,9 +1,18 @@
 package tvz.videc.zavrsni.webshop.model.login;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -23,9 +32,9 @@ public class Authority {
             inverseJoinColumns = {@JoinColumn(name = "user_id") }
     )
     @JsonIgnore
-    private List<User> usersAuthority;
+    private List<AppUser> usersAuthority;
 
-    public Authority(Long id, String name, List<User> usersAuthority) {
+    public Authority(Long id, String name, List<AppUser> usersAuthority) {
         this.id = id;
         this.name = name;
         this.usersAuthority = usersAuthority;
@@ -41,7 +50,7 @@ public class Authority {
 
     public void setName(String name) { this.name = name; }
 
-    public List<User> getUsers() { return usersAuthority; }
+    public List<AppUser> getUsers() { return usersAuthority; }
 
-    public void setUsers(List<User> users) { this.usersAuthority = users; }
+    public void setUsers(List<AppUser> users) { this.usersAuthority = users; }
 }

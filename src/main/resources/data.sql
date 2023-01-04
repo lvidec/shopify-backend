@@ -1,14 +1,14 @@
-INSERT INTO USER(id, username, email, PASSWORD) VALUES
+INSERT INTO app_user(id, username, email, PASSWORD) VALUES
 (1, 'Lima', 'leonardo.videc@gmail.com', '$2a$10$ERT6Je2dwmNVwAko2iTv9.MTJ0KKlXreb6SjRZ2Cwn0LeRrn/Jtw6') 
 ON DUPLICATE KEY 
 UPDATE id = 1;
 
-INSERT INTO USER(id, username, email, PASSWORD) VALUES
+INSERT INTO app_user(id, username, email, PASSWORD) VALUES
 (2, 'Siti', 'alen.sitar@gmail.com', '$2a$10$x5IZe8QL.e57RQZxRERilufIVDfHsRe5YtB1rtURvey/HuqG7rxuG') 
 ON DUPLICATE KEY 
 UPDATE id = 2;
 
-INSERT INTO USER(id, username, email, PASSWORD) VALUES
+INSERT INTO app_user(id, username, email, PASSWORD) VALUES
 (3, 'Edi', 'edi.petak@gmail.com', '$2a$10$DrwxcXhyVOPZH46dyNm0g.6QxQfjJbFnWE4mTcJ3UAlyWzsf7rlO2') 
 ON DUPLICATE KEY 
 UPDATE id = 3;

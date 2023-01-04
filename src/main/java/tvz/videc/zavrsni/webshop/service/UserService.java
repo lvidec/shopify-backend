@@ -1,10 +1,10 @@
 package tvz.videc.zavrsni.webshop.service;
 
-import tvz.videc.zavrsni.webshop.model.login.User;
-import tvz.videc.zavrsni.webshop.model.login.UserDTO;
-
 import java.util.List;
 import java.util.Optional;
+
+import tvz.videc.zavrsni.webshop.model.login.AppUser;
+import tvz.videc.zavrsni.webshop.model.login.UserDTO;
 
 public interface UserService {
 
@@ -12,9 +12,9 @@ public interface UserService {
 
     UserDTO findByUsername(String username);
 
-    User findFullById(Long id);
+    AppUser findFullById(Long id);
 
-    Optional<UserDTO> save(User user);
+    Optional<UserDTO> save(AppUser user);
 
     Optional<UserDTO> addClothingToUser(Long userId, Long clothingId);
 

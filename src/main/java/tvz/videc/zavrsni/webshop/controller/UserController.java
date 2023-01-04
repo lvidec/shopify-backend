@@ -1,14 +1,23 @@
 package tvz.videc.zavrsni.webshop.controller;
 
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import tvz.videc.zavrsni.webshop.model.login.User;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+import tvz.videc.zavrsni.webshop.model.login.AppUser;
 import tvz.videc.zavrsni.webshop.model.login.UserDTO;
 import tvz.videc.zavrsni.webshop.service.UserService;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -32,12 +41,12 @@ public class UserController {
 //    }
 
     @GetMapping("/{id}")
-    public User findFullById(@PathVariable final Long id) {
+    public AppUser findFullById(@PathVariable final Long id) {
         return userService.findFullById(id);
     }
 
     @PostMapping("/save")
-    public ResponseEntity<UserDTO> saveUser(@RequestBody User user){
+    public ResponseEntity<UserDTO> saveUser(@RequestBody AppUser user){
         return userService.save(user).map(
                 userDTO -> ResponseEntity.status(HttpStatus.CREATED).body(userDTO)
         ).orElseGet(

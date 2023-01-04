@@ -1,15 +1,14 @@
 package tvz.videc.zavrsni.webshop.service;
 
-import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Service;
-import tvz.videc.zavrsni.webshop.model.login.User;
-import tvz.videc.zavrsni.webshop.model.products.Clothing;
-import tvz.videc.zavrsni.webshop.model.products.ClothingDTO;
-import tvz.videc.zavrsni.webshop.repository.ClothingRepository;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
+import tvz.videc.zavrsni.webshop.model.products.Clothing;
+import tvz.videc.zavrsni.webshop.model.products.ClothingDTO;
+import tvz.videc.zavrsni.webshop.repository.ClothingRepository;
 
 @Service
 public class ClothingServiceImpl implements ClothingService {
