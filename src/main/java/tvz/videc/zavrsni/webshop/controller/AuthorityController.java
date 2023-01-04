@@ -17,13 +17,12 @@ public class AuthorityController {
 
     private final AuthorityServiceImpl authorityService;
 
-    public AuthorityController(AuthorityServiceImpl authorityService){
+    public AuthorityController(final AuthorityServiceImpl authorityService) {
         this.authorityService = authorityService;
     }
 
-    @GetMapping/*("/{username}")*/
-    public List<AuthorityDTO> getAll(/*@PathVariable String username*/){
-        return authorityService.getAllAuthority(/*username*/);
+    @GetMapping/*("/{username}")*/ public List<AuthorityDTO> getAll(/*@PathVariable String username*/) {
+        return this.authorityService.getAllAuthority(/*username*/);
     }
 
 }

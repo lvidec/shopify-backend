@@ -13,11 +13,17 @@ import tvz.videc.zavrsni.webshop.repository.ShoesRepository;
 @Service
 public class ShoesServiceImpl implements ShoesService {
 
-//    @Autowired
+    //    @Autowired
     private final ShoesRepository shoesRepository;
 
-    public ShoesServiceImpl(ShoesRepository shoesRepository){
+    public ShoesServiceImpl(final ShoesRepository shoesRepository) {
         this.shoesRepository = shoesRepository;
+    }
+
+    public ShoesDTO mapShoesToShoesDTO(final Shoes shoes) {
+        return new ShoesDTO(
+          shoes.getId(), shoes.getName(), shoes.getDetails(), shoes.getPrice(), shoes.getImg(), shoes.getBrandName(), shoes.getSex(),
+          shoes.getShoesType());
     }
 
     @Override
@@ -26,27 +32,24 @@ public class ShoesServiceImpl implements ShoesService {
     }
 
     @Override
-    public Optional<ShoesDTO> findByName(String name) {
-        return shoesRepository.findByName(name).map(this::mapShoesToShoesDTO);
+    public Optional<ShoesDTO> findByName(final String name) {
+        return this.shoesRepository.findByName(name).map(this::mapShoesToShoesDTO);
     }
 
     @Override
-    public Optional<Shoes> findFullById(Long id) {
-        return shoesRepository.findById(id);
+    public Optional<Shoes> findFullById(final Long id) {
+        return this.shoesRepository.findById(id);
     }
 
     @Override
-    public Optional<ShoesDTO> save(Shoes shoes) {
-        shoesRepository.save(shoes);
-        return Optional.of(mapShoesToShoesDTO(shoes));
+    public Optional<ShoesDTO> save(final Shoes shoes) {
+        this.shoesRepository.save(shoes);
+        return Optional.of(this.mapShoesToShoesDTO(shoes));
     }
 
     @Override
-    public void delete(Long id) {
-        shoesRepository.deleteById(id);
+    public void delete(final Long id) {
+        this.shoesRepository.deleteById(id);
     }
 
-    public ShoesDTO mapShoesToShoesDTO(Shoes shoes){
-        return new ShoesDTO(shoes.getId(), shoes.getName(), shoes.getDetails(), shoes.getPrice(), shoes.getImg(), shoes.getBrandName(), shoes.getSex(), shoes.getShoesType());
-    }
 }

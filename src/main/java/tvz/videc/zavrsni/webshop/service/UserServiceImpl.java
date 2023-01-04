@@ -26,11 +26,17 @@ public class UserServiceImpl implements UserService {
     private final ShoesRepository shoesRepository;
     private final AuthorityRepository authorityRepository;
 
-    public UserServiceImpl(UserRepository userRepository, ClothingRepository clothingRepository, ShoesRepository shoesRepository, AuthorityRepository authorityRepository){
+    public UserServiceImpl(final UserRepository userRepository, final ClothingRepository clothingRepository, final ShoesRepository shoesRepository, final AuthorityRepository authorityRepository) {
         this.userRepository = userRepository;
         this.clothingRepository = clothingRepository;
         this.shoesRepository = shoesRepository;
         this.authorityRepository = authorityRepository;
+    }
+
+    public UserDTO mapUserToUserDTO(final AppUser user) {
+        return new UserDTO(user.getId(), user.getUsername(), user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet()));
+
+        //        return new ModelMapper().map(user, UserDTO.class);
     }
 
     @Override
@@ -39,80 +45,71 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO findByUsername(String username) {
+    public UserDTO findByUsername(final String username) {
         return this.userRepository.findByUsername(username).map(this::mapUserToUserDTO).orElseThrow(EntityNotFoundException::new);
     }
 
     @Override
-    public AppUser findFullById(Long id){
+    public AppUser findFullById(final Long id) {
         return this.userRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Optional<UserDTO> save(AppUser user) {
-//another one//        userRepository.save(user);
-////        return Optional.of(mapUserToUserDTO(user));
+    public Optional<UserDTO> save(final AppUser user) {
+        //another one//        userRepository.save(user);
+        ////        return Optional.of(mapUserToUserDTO(user));
 
-        AppUser newUser = new AppUser();
+        final AppUser newUser = new AppUser();
         newUser.setUsername(user.getUsername());
         newUser.setEmail(user.getEmail());
         newUser.setPassword(user.getPassword());
-        newUser.getAuthorities()
-                .addAll(user
-                        .getAuthorities()
-                        .stream()
-                        .map(authority -> {
-                            Authority newAuthority = authorityRepository.findById(authority.getId()).orElseThrow(EntityNotFoundException::new);
-                            newAuthority.getUsers().add(newUser);
-                            return newAuthority;
-                        }).collect(Collectors.toSet()));
-//        newUser.getUserClothing()
-//                .addAll(user
-//                        .getUserClothing()
-//                        .stream()
-//                        .map(clothing -> {
-//                            Clothing newClothing = clothingRepository.findById(clothing.getId()).orElseThrow(EntityNotFoundException::new);
-//                            newClothing.getUsersClothing().add(newUser);
-//                            return newClothing;
-//                        }).collect(Collectors.toSet()));
-//        newUser.getUserShoes()
-//                .addAll(user
-//                        .getUserShoes()
-//                        .stream()
-//                        .map(shoes -> {
-//                            Shoes newShoes = shoesRepository.findById(shoes.getId()).orElseThrow(EntityNotFoundException::new);
-//                            newShoes.getUsersShoes().add(newUser);
-//                            return newShoes;
-//                        }).collect(Collectors.toSet()));
+        newUser.getAuthorities().addAll(user.getAuthorities().stream().map(authority -> {
+            final Authority newAuthority = this.authorityRepository.findById(authority.getId()).orElseThrow(EntityNotFoundException::new);
+            newAuthority.getUsers().add(newUser);
+            return newAuthority;
+        }).collect(Collectors.toSet()));
+        //        newUser.getUserClothing()
+        //                .addAll(user
+        //                        .getUserClothing()
+        //                        .stream()
+        //                        .map(clothing -> {
+        //                            Clothing newClothing = clothingRepository.findById(clothing.getId()).orElseThrow(EntityNotFoundException::new);
+        //                            newClothing.getUsersClothing().add(newUser);
+        //                            return newClothing;
+        //                        }).collect(Collectors.toSet()));
+        //        newUser.getUserShoes()
+        //                .addAll(user
+        //                        .getUserShoes()
+        //                        .stream()
+        //                        .map(shoes -> {
+        //                            Shoes newShoes = shoesRepository.findById(shoes.getId()).orElseThrow(EntityNotFoundException::new);
+        //                            newShoes.getUsersShoes().add(newUser);
+        //                            return newShoes;
+        //                        }).collect(Collectors.toSet()));
 
-        userRepository.save(newUser);
+        this.userRepository.save(newUser);
 
-        return Optional.of(mapUserToUserDTO(newUser));
+        return Optional.of(this.mapUserToUserDTO(newUser));
     }
 
     @Override
-    public Optional<UserDTO> addClothingToUser(Long userId, Long clothingId) {
-        AppUser user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
-        Clothing clothing = clothingRepository.findById(clothingId).orElseThrow(EntityNotFoundException::new);
-//        user.getUserClothing().add(clothing);
-//another one//        user.setUserClothing(List.of(clothing));
+    public Optional<UserDTO> addClothingToUser(final Long userId, final Long clothingId) {
+        final AppUser user = this.userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
+        final Clothing clothing = this.clothingRepository.findById(clothingId).orElseThrow(EntityNotFoundException::new);
+        //        user.getUserClothing().add(clothing);
+        //another one//        user.setUserClothing(List.of(clothing));
 
         user.setUsername("isuskrist ");
 
-//another one//        user.getUserClothing().forEach(x -> System.out.println(x.getName()));
+        //another one//        user.getUserClothing().forEach(x -> System.out.println(x.getName()));
 
-        userRepository.save(user);
-        return Optional.of(mapUserToUserDTO(user));
+        this.userRepository.save(user);
+        return Optional.of(this.mapUserToUserDTO(user));
     }
 
     @Override
-    public void delete(Long id) {
-        userRepository.deleteById(id);
+    public void delete(final Long id) {
+        this.userRepository.deleteById(id);
     }
 
-    public UserDTO mapUserToUserDTO(AppUser user){
-        return new UserDTO(user.getId(), user.getUsername(), user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet()));
-
-//        return new ModelMapper().map(user, UserDTO.class);
-    }
 }

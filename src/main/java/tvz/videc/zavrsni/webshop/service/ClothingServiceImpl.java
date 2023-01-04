@@ -13,11 +13,17 @@ import tvz.videc.zavrsni.webshop.repository.ClothingRepository;
 @Service
 public class ClothingServiceImpl implements ClothingService {
 
-//    @Autowired
+    //    @Autowired
     private final ClothingRepository clothingRepository;
 
-    public ClothingServiceImpl(ClothingRepository clothingRepository){
+    public ClothingServiceImpl(final ClothingRepository clothingRepository) {
         this.clothingRepository = clothingRepository;
+    }
+
+    public ClothingDTO mapClothingToClothingDTO(final Clothing clothing) {
+        return new ClothingDTO(
+          clothing.getId(), clothing.getName(), clothing.getDetails(), clothing.getPrice(), clothing.getImg(), clothing.getBrandName(),
+          clothing.getSex(), clothing.getClothingType());
     }
 
     @Override
@@ -26,27 +32,24 @@ public class ClothingServiceImpl implements ClothingService {
     }
 
     @Override
-    public Optional<ClothingDTO> findByName(String name) {
-        return clothingRepository.findByName(name).map(this::mapClothingToClothingDTO);
+    public Optional<ClothingDTO> findByName(final String name) {
+        return this.clothingRepository.findByName(name).map(this::mapClothingToClothingDTO);
     }
 
     @Override
-    public Optional<Clothing> findFullById(Long id) {
-        return clothingRepository.findById(id);
+    public Optional<Clothing> findFullById(final Long id) {
+        return this.clothingRepository.findById(id);
     }
 
     @Override
-    public Optional<ClothingDTO> save(Clothing clothing) {
-        clothingRepository.save(clothing);
-        return Optional.of(mapClothingToClothingDTO(clothing));
+    public Optional<ClothingDTO> save(final Clothing clothing) {
+        this.clothingRepository.save(clothing);
+        return Optional.of(this.mapClothingToClothingDTO(clothing));
     }
 
     @Override
-    public void delete(Long id) {
-        clothingRepository.deleteById(id);
+    public void delete(final Long id) {
+        this.clothingRepository.deleteById(id);
     }
 
-    public ClothingDTO mapClothingToClothingDTO(Clothing clothing){
-        return new ClothingDTO(clothing.getId(), clothing.getName(), clothing.getDetails(), clothing.getPrice(), clothing.getImg(), clothing.getBrandName(), clothing.getSex(), clothing.getClothingType());
-    }
 }

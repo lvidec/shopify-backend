@@ -24,48 +24,47 @@ import tvz.videc.zavrsni.webshop.service.UserService;
 @CrossOrigin(origins = "${cross.origin}")
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
-    public UserController(UserService userService){
+    public UserController(final UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping
-    public List<UserDTO> findAll(){
-        return userService.findAll();
+    public List<UserDTO> findAll() {
+        return this.userService.findAll();
     }
 
-//    @GetMapping("/{username}")
-//    public UserDTO findByUsername(@PathVariable final String username) {
-//        return userService.findByUsername(username);
-//    }
+    //    @GetMapping("/{username}")
+    //    public UserDTO findByUsername(@PathVariable final String username) {
+    //        return userService.findByUsername(username);
+    //    }
 
     @GetMapping("/{id}")
     public AppUser findFullById(@PathVariable final Long id) {
-        return userService.findFullById(id);
+        return this.userService.findFullById(id);
     }
 
     @PostMapping("/save")
-    public ResponseEntity<UserDTO> saveUser(@RequestBody AppUser user){
-        return userService.save(user).map(
-                userDTO -> ResponseEntity.status(HttpStatus.CREATED).body(userDTO)
-        ).orElseGet(
-                () -> ResponseEntity.status(HttpStatus.CONFLICT).build()
-        );
+    public ResponseEntity<UserDTO> saveUser(@RequestBody final AppUser user) {
+        return this.userService
+          .save(user)
+          .map(userDTO -> ResponseEntity.status(HttpStatus.CREATED).body(userDTO))
+          .orElseGet(() -> ResponseEntity.status(HttpStatus.CONFLICT).build());
     }
 
     @PutMapping("{userId}/save/{clothingId}")
-    public ResponseEntity<UserDTO> saveUser(@PathVariable Long userId, @PathVariable Long clothingId){
-        return userService.addClothingToUser(userId, clothingId).map(
-                userDTO -> ResponseEntity.status(HttpStatus.CREATED).body(userDTO)
-        ).orElseGet(
-                () -> ResponseEntity.status(HttpStatus.CONFLICT).build()
-        );
+    public ResponseEntity<UserDTO> saveUser(@PathVariable final Long userId, @PathVariable final Long clothingId) {
+        return this.userService
+          .addClothingToUser(userId, clothingId)
+          .map(userDTO -> ResponseEntity.status(HttpStatus.CREATED).body(userDTO))
+          .orElseGet(() -> ResponseEntity.status(HttpStatus.CONFLICT).build());
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Long id){
-        userService.delete(id);
+    public void deleteUser(@PathVariable final Long id) {
+        this.userService.delete(id);
     }
+
 }

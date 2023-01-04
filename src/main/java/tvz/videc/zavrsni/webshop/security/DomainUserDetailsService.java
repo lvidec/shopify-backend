@@ -19,27 +19,27 @@ public class DomainUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-    public DomainUserDetailsService(UserRepository userRepository) {
+    public DomainUserDetailsService(final UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    private org.springframework.security.core.userdetails.User createSpringSecurityUser(final AppUser user) {
+        final List<GrantedAuthority> grantedAuthorities = user
+          .getAuthorities()
+          .stream()
+          .map(authority -> new SimpleGrantedAuthority(authority.getName()))
+          .collect(Collectors.toList());
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
     }
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(final String username) {
 
-        return userRepository
-                .findByUsername(username)
-                .map(this::createSpringSecurityUser)
-                .orElseThrow(() -> new UsernameNotFoundException("User " + username + " was not found in the database"));
-    }
-
-    private org.springframework.security.core.userdetails.User createSpringSecurityUser(AppUser user) {
-        List<GrantedAuthority> grantedAuthorities = user
-                .getAuthorities()
-                .stream()
-                .map(authority -> new SimpleGrantedAuthority(authority.getName()))
-                .collect(Collectors.toList());
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
+        return this.userRepository
+          .findByUsername(username)
+          .map(this::createSpringSecurityUser)
+          .orElseThrow(() -> new UsernameNotFoundException("User " + username + " was not found in the database"));
     }
 
 }

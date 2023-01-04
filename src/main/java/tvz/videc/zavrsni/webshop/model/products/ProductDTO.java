@@ -11,4 +11,5 @@ public class ProductDTO {
     private String details;
     private float price;
     private String img;
+
 }
