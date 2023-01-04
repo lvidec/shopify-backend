@@ -32,6 +32,7 @@ public class LoginController {
     @PostMapping("/authenticate")
     @Secured("permitAll")
     public ResponseEntity<ReturningObject> authenticate(@Valid @RequestBody LoginDTO login) {
+        System.out.println("uso u authenticate method ");
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken( login.getUsername(), login.getPassword() );
 
@@ -43,6 +44,8 @@ public class LoginController {
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
+
+        System.out.println("responsero entitis " + new ResponseEntity<>(new ReturningObject(new JwtToken(jwt), login.getUsername(), login.getPassword()), httpHeaders, HttpStatus.OK).toString());
 
         return new ResponseEntity<>(new ReturningObject(new JwtToken(jwt), login.getUsername(), login.getPassword()), httpHeaders, HttpStatus.OK);
     }
